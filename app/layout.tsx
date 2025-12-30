@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/icon-192.png" />
+        <link rel="icon" href="./icon-192.png" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className={inter.className}>

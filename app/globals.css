@@ -164,6 +164,70 @@
     background-color: #fff !important;
   }
 
+  /* Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Make the main container scrollable horizontally */
+  .overflow-x-auto {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Add scrollbar styling */
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  /* Adjust header buttons for mobile */
+  .flex.items-center.gap-3 {
+    flex-wrap: wrap;
+  }
+
+  /* Make buttons smaller on mobile */
+  button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  /* Stack manage sections on mobile */
+  .grid.md\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  /* Smaller title on very small screens */
+  h1.text-3xl {
+    font-size: 1.5rem;
+  }
+
+  h2.text-2xl {
+    font-size: 1.25rem;
+  }
+
+  /* Hide "Auto-Save ON" text on very small screens, keep icon */
+  .bg-green-100 span {
+    display: none;
+  }
+
+  .bg-green-100 {
+    padding: 8px;
+  }
+}
+
   /* Ensure proper column widths */
   .schedule-table th:nth-child(1),
   .schedule-table td:nth-child(1) {

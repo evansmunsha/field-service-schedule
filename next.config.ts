@@ -1,6 +1,21 @@
-import type { NextConfig } from "next";
-
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+});
+
+const nextConfig = {
+  webpack: (config: any) => config,
+};
+
+module.exports = withPWA(nextConfig);
+
+
+/* import type { NextConfig } from "next";
+
+/** @type {import('next').NextConfig} *//*
 const withPWA = require('next-pwa')({
   dest: 'dist',
   register: true,
@@ -9,7 +24,7 @@ const withPWA = require('next-pwa')({
 })
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* config options here *//*
   output: 'export',
   distDir: 'dist',
   
@@ -20,4 +35,4 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
 };
 
-module.exports = withPWA(nextConfig)
+module.exports = withPWA(nextConfig) */

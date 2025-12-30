@@ -324,6 +324,11 @@ const [topics, setTopics] = useState<string[]>([
               <strong>💡 Tip:</strong> When you navigate to a new month, assignments are automatically copied from the previous month. Click &quot;Print&quot; to create a notice board version.
             </p>
           </div>
+          <div className="mb-4 p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded block md:hidden">
+            <p className="text-sm text-yellow-800">
+              <strong>📱 Mobile View:</strong> Scroll horizontally to see all columns →
+            </p>
+          </div>
 
           <div id="printable-schedule">
             <div className="print-header">
@@ -336,7 +341,7 @@ const [topics, setTopics] = useState<string[]>([
               </h2>
             </div>
             
-            <div className="overflow-x-auto">
+            {/* <div className="overflow-x-auto">
               <table className="schedule-table">
                 <thead>
                   <tr>
@@ -407,6 +412,80 @@ const [topics, setTopics] = useState<string[]>([
                   )}
                 </tbody>
               </table>
+            </div> */}
+            <div className="overflow-x-auto">
+              <div className="min-w-175">
+                <table className="schedule-table w-full">
+                  <thead>
+                    <tr>
+                      <th className="print-th">DATE</th>
+                      <th className="print-th">CONDUCTOR</th>
+                      <th className="print-th">TOPIC/MATERIAL</th>
+                      <th className="print-th">PRAYER</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentSchedules.length === 0 ? (
+                      <tr>
+                        <td colSpan={4} className="border-2 border-black p-4 text-center text-gray-500">
+                          No service days in this month
+                        </td>
+                      </tr>
+                    ) : (
+                      currentSchedules.map((schedule, index) => (
+                        <tr key={index} className="schedule-row">
+                          <td className="print-td font-bold whitespace-nowrap">{schedule.date}</td>
+                          <td className="print-td">
+                            <select
+                              value={schedule.conductor}
+                              onChange={(e) => updateSchedule(index, 'conductor', e.target.value)}
+                              className="w-full min-w-37.5 p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
+                            >
+                              <option value="">Select Conductor</option>
+                              {people.map((person, i) => (
+                                <option key={i} value={person}>{person}</option>
+                              ))}
+                            </select>
+                            <span className="print-value">
+                              {schedule.conductor || '_______________'}
+                            </span>
+                          </td>
+                          <td className="print-td">
+                            <select
+                              value={schedule.topic}
+                              onChange={(e) => updateSchedule(index, 'topic', e.target.value)}
+                              className="w-full min-w-50 p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
+                            >
+                              <option value="">Select Topic</option>
+                              {topics.map((topic, i) => (
+                                <option key={i} value={topic}>{topic}</option>
+                              ))}
+                            </select>
+                            <span className="print-value">
+                              {schedule.topic || '_______________'}
+                            </span>
+                          </td>
+                          <td className="print-td">
+                            <select
+                              value={schedule.prayer}
+                              onChange={(e) => updateSchedule(index, 'prayer', e.target.value)}
+                              className="w-full min-w-37.5 p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
+                            >
+                              <option value="">Select Prayer</option>
+                              {people.map((person, i) => (
+                                <option key={i} value={person}>{person}</option>
+                              ))}
+                            </select>
+                            <span className="print-value">
+                              {schedule.prayer || '_______________'}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
