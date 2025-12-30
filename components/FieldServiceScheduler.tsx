@@ -263,69 +263,81 @@ const [topics, setTopics] = useState<string[]>([
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-white rounded-lg shadow-xl p-6 mb-6">
-          <div className="flex items-center justify-between mb-6 no-print">
-            <div className="flex items-center gap-3">
-              <Calendar className="w-8 h-8 text-indigo-600" />
-              <h1 className="text-3xl font-bold text-gray-800">Field Service Schedule</h1>
-            </div>
-            <div className="flex items-center gap-3">
-              {saveStatus && (
-                <span className={`text-sm font-semibold ${saveStatus.includes('✓') ? 'text-green-600' : 'text-red-600'}`}>
-                  {saveStatus}
-                </span>
-              )}
-              <button
-                onClick={handlePrint}
-                className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition"
-              >
-                <Printer className="w-4 h-4" />
-                Print
-              </button>
-              <div className="flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-lg">
-                <CheckCircle className="w-4 h-4" />
-                <span className="text-sm font-semibold">Auto-Save ON</span>
+        <div className="bg-white rounded-lg shadow-xl md:p-6 mb-6">
+          
+          <div className="bg-white rounded-lgshadow-xl  md:p-6 mb-6">
+          {/* Top Header */}
+          <div className="flex flex-col gap-3 mb-6 no-print">
+            {/* Title and Actions Row */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <Calendar className="w-6 h-6 md:w-8 md:h-8 text-indigo-600 flex-shrink-0" />
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+                  Field Service Schedule
+                </h1>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                {saveStatus && (
+                  <span className={`text-xs md:text-sm font-semibold whitespace-nowrap ${saveStatus.includes('✓') ? 'text-green-600' : 'text-red-600'}`}>
+                    {saveStatus}
+                  </span>
+                )}
+                <button
+                  onClick={handlePrint}
+                  className="flex items-center gap-2 bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-900 transition text-sm"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Print</span>
+                </button>
+                <div className="flex items-center gap-2 bg-green-100 text-green-700 px-3 py-2 rounded-lg">
+                  <CheckCircle className="w-4 h-4" />
+                  <span className="text-xs md:text-sm font-semibold">Auto-Save ON</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center justify-between mb-6 no-print">
-            <button
-              onClick={() => changeMonth(-1)}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
-            >
-              ← Previous
-            </button>
-            <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-semibold text-gray-700">
-                {monthNames[currentMonth]} {currentYear}
-              </h2>
+            {/* Month Navigation Row */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-gray-200">
               <button
-                onClick={copyFromPreviousMonth}
-                className="flex items-center gap-2 bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition text-sm"
-                title="Copy assignments from previous month"
+                onClick={() => changeMonth(-1)}
+                className="w-full sm:w-auto bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm"
               >
-                <Copy className="w-4 h-4" />
-                Copy Previous
+                ← Previous
+              </button>
+              <div className="flex items-center gap-2 flex-wrap justify-center">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 whitespace-nowrap">
+                  {monthNames[currentMonth]} {currentYear}
+                </h2>
+                <button
+                  onClick={copyFromPreviousMonth}
+                  className="flex items-center gap-2 bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition text-xs sm:text-sm"
+                  title="Copy assignments from previous month"
+                >
+                  <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span>Copy Previous</span>
+                </button>
+              </div>
+              <button
+                onClick={() => changeMonth(1)}
+                className="w-full sm:w-auto bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm"
+              >
+                Next →
               </button>
             </div>
-            <button
-              onClick={() => changeMonth(1)}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
-            >
-              Next →
-            </button>
           </div>
 
+          {/* Tip Message */}
           <div className="mb-4 p-3 bg-blue-50 border-l-4 border-blue-500 rounded no-print">
-            <p className="text-sm text-blue-800">
+            <p className="text-xs sm:text-sm text-blue-800">
               <strong>💡 Tip:</strong> When you navigate to a new month, assignments are automatically copied from the previous month. Click &quot;Print&quot; to create a notice board version.
             </p>
           </div>
-          <div className="mb-4 p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded block md:hidden">
-            <p className="text-sm text-yellow-800">
+
+          {/* Mobile Scroll Warning */}
+          <div className="mb-4 p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded block sm:hidden no-print">
+            <p className="text-xs text-yellow-800">
               <strong>📱 Mobile View:</strong> Scroll horizontally to see all columns →
             </p>
           </div>
@@ -341,78 +353,6 @@ const [topics, setTopics] = useState<string[]>([
               </h2>
             </div>
             
-            {/* <div className="overflow-x-auto">
-              <table className="schedule-table">
-                <thead>
-                  <tr>
-                    <th className="print-th">DATE</th>
-                    <th className="print-th">CONDUCTOR</th>
-                    <th className="print-th">TOPIC/MATERIAL</th>
-                    <th className="print-th">PRAYER</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentSchedules.length === 0 ? (
-                    <tr>
-                      <td colSpan={4} className="border-2 border-black p-4 text-center text-gray-500">
-                        No service days in this month
-                      </td>
-                    </tr>
-                  ) : (
-                    currentSchedules.map((schedule, index) => (
-                      <tr key={index} className="schedule-row">
-                        <td className="print-td font-bold">{schedule.date}</td>
-                        <td className="print-td">
-                          <select
-                            value={schedule.conductor}
-                            onChange={(e) => updateSchedule(index, 'conductor', e.target.value)}
-                            className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
-                          >
-                            <option value="">Select Conductor</option>
-                            {people.map((person, i) => (
-                              <option key={i} value={person}>{person}</option>
-                            ))}
-                          </select>
-                          <span className="print-value">
-                            {schedule.conductor || '_______________'}
-                          </span>
-                        </td>
-                        <td className="print-td">
-                          <select
-                            value={schedule.topic}
-                            onChange={(e) => updateSchedule(index, 'topic', e.target.value)}
-                            className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
-                          >
-                            <option value="">Select Topic</option>
-                            {topics.map((topic, i) => (
-                              <option key={i} value={topic}>{topic}</option>
-                            ))}
-                          </select>
-                          <span className="print-value">
-                            {schedule.topic || '_______________'}
-                          </span>
-                        </td>
-                        <td className="print-td">
-                          <select
-                            value={schedule.prayer}
-                            onChange={(e) => updateSchedule(index, 'prayer', e.target.value)}
-                            className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 no-print"
-                          >
-                            <option value="">Select Prayer</option>
-                            {people.map((person, i) => (
-                              <option key={i} value={person}>{person}</option>
-                            ))}
-                          </select>
-                          <span className="print-value">
-                            {schedule.prayer || '_______________'}
-                          </span>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div> */}
             <div className="overflow-x-auto">
               <div className="min-w-175">
                 <table className="schedule-table w-full">
@@ -558,6 +498,7 @@ const [topics, setTopics] = useState<string[]>([
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

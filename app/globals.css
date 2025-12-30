@@ -159,6 +159,7 @@
   .schedule-row:nth-child(even) {
     background-color: #f5f5f5 !important;
   }
+  
 
   .schedule-row:nth-child(odd) {
     background-color: #fff !important;
