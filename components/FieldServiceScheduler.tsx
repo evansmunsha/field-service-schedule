@@ -273,7 +273,7 @@ const [topics, setTopics] = useState<string[]>([
             {/* Title and Actions Row */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <Calendar className="w-6 h-6 md:w-8 md:h-8 text-indigo-600 flex-shrink-0" />
+                <Calendar className="w-6 h-6 md:w-8 md:h-8 text-indigo-600 shrink-0" />
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
                   Field Service Schedule
                 </h1>
